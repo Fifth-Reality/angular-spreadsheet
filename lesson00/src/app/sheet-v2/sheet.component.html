@@ -1,0 +1,19 @@
+<table #mytable class="frtable">
+  <thead class="frtable-head">
+    <tr>
+      <th *ngFor="let col of displayColumns()">
+        <div>{{col.name}}</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of displayData(); let i = index" >
+      <td *ngFor="let col of displayColumns(); let j=index">
+        
+        {{row[col.name]}}
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
