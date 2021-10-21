@@ -1,0 +1,93 @@
+
+.frtable {
+  border: 1px solid;
+  border-color: Highlight;
+  border-width: 1px 0px 0px 1px;
+  font-size: 11pt;
+  font-family: Calibri;
+  font-weight: 100;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+.frtable TH {
+  //background-image: url(bg.png);
+  background-repeat: repeat-x;
+  font-weight: bold;
+  font-size: 14px;
+  border: 1px solid #9EB6CE;
+  border-width: 0px 1px 1px 0px;
+  height: 16px;
+}
+
+.frtable TD {
+  border: 0px;
+  background-color: white;
+  padding: 0px 4px 0px 2px;
+  border: 1px solid #D0D7E5;
+  border-width: 0px 1px 1px 0px;
+}
+
+.frtable TD B {
+  border: 0px;
+  background-color: white;
+  font-weight: bold;
+}
+
+.frtable TD.heading {
+  background-color: #E4ECF7;
+  text-align: center;
+  border: 1px solid #9EB6CE;
+  border-width: 0px 1px 1px 0px;
+}
+
+.frtable TH.heading {
+  // background-image: url(excel-2007-header-left.gif);
+  background-repeat: none;
+}
+
+.frtable TD.cell-selected {
+  border: 2px solid #00CBEF;
+  border-width: 2px 2px 2px 1px;
+  font-size: 14pt;
+  -webkit-user-select: none; /* Webkit  */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10   */
+  //  -o-user-select: none; /* Currently not supported in Opera but will be soon */
+  user-select: none;
+}
+
+.frtable TD.cell-selected-top {
+  border-top-width: 4px;
+}
+
+.frtable TD.cell-selected-bottom {
+  border-bottom-width: 4px;
+}
+
+input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-family: Verdana, Helvetica, Arial, FreeSans, sans-serif;
+  font-size: 12px;
+  padding: 0 4px 0 4px;
+}
+
+
+input:focus {
+  border: 2px solid #5292F7;
+  outline: none;
+}
+
+
+
+/*---- Remove default browser behaviour after selecting cells ----*/
+.selected, .unselected {
+  -webkit-user-select: none; /* Webkit  */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10   */
+  -o-user-select: none; /*  */
+  user-select: none;
+}
+/*--------End Editable Cells--------*/
