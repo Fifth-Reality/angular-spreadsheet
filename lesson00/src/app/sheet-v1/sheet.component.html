@@ -1,12 +1,19 @@
-<table #mytable>
-  <thead>
+<table #mytable class="fr-table">
+  <thead class="fr-table-head">
     <tr>
-      <th>Sample Heading</th>
+      <th *ngFor="let col of displayColumns()">
+        <div>{{col.name}}</div>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-        <td>sheet-v1 works!</td>
+    <tr *ngFor="let row of displayData(); let i = index" >
+      <td *ngFor="let col of displayColumns(); let j=index">
+        
+        {{row[col.name]}}
+
+      </td>
     </tr>
   </tbody>
 </table>
+
