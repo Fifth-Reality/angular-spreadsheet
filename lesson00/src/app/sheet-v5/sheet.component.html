@@ -1,0 +1,47 @@
+<form #thisForm="ngForm">
+
+
+
+  <table #mytable class="frtable">
+    <thead class="frtable-head">
+      <tr>
+        <th *ngFor="let col of displayColumns()">
+          <div>{{col.name}}</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of displayData(); let i = index">
+        <td *ngFor="let column of displayColumns(); let j=index">
+
+          <div *ngIf="isCellEdit(i,j)">
+            <!-- input edit-->
+            <ng-container *ngIf="!isDropdown(column)">
+              <input [(ngModel)]="row[column.name]"
+                     name="cell_{{i}}_{{j}}"
+                     (keydown)="onKeyEvent($event,'input','keydown')" />
+            </ng-container>
+            <!-- input edit-->
+            <!-- dropdown edit-->
+            <ng-container *ngIf="isDropdown(column)">
+              <select [(ngModel)]="row[column.name]" name="select_{{i}}_{{j}}">
+                <option *ngFor="let kv of getDropdown(column)  | keyvalue" value="{{kv.key}}">
+                  {{kv.value}}
+                </option>
+              </select>
+            </ng-container>
+            <!-- dropdown edit-->
+          </div>
+          <!-- read only cell-->
+          <div *ngIf="!isCellEdit(i,j)"
+               (click)="currentRow=i; currentCol=j; ">
+            {{ getDisplayValue (column, row[column.name])}}
+          </div>
+          <!-- read only  cell-->
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</form>

@@ -1,11 +1,31 @@
 
-<h1> Version 3 : Dropdown </h1>
-<excel-sheet-v3></excel-sheet-v3>
+<form  #thisVersionForm="ngForm">
+  <input [(ngModel)]="version" name="version" />
+  
+</form>
 
 
-<h1> Version 2 : Editable Cell </h1>
-<excel-sheet-v2></excel-sheet-v2>
+<div *ngIf=" version=='5' ">
+  <h1> Version 5 : Clipboard Options </h1>
+  <excel-sheet-v5></excel-sheet-v5>
+</div>
 
+<div *ngIf=" version=='4' ">
+  <h1> Version 4 : Select Multiple Cells </h1>
+  <excel-sheet-v4></excel-sheet-v4>
+</div>
 
-<h1> Version 1 </h1>
-<excel-sheet-v1></excel-sheet-v1>
+<div *ngIf=" version=='3'">
+  <h1> Version 3 : Dropdown </h1>
+  <excel-sheet-v3></excel-sheet-v3>
+</div>
+<div *ngIf=" version=='2' ">
+  <h1> Version 2 : Editable Cell </h1>
+  <excel-sheet-v2></excel-sheet-v2>
+</div>
+
+<div *ngIf=" version=='1' ">
+  <h1> Version 1 : Basic Display</h1>
+  <excel-sheet-v1></excel-sheet-v1>
+</div>
+
