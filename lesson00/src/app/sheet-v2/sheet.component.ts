@@ -28,7 +28,7 @@ export class SheetV2Component implements OnInit {
   // input properties
   
   @Input() data :any = sampleData;
-  @Input() lookups: any;
+  @Input() lookups:any = sampleLookups;
   @Input() columns: any;
   @Input() config: any;
 
@@ -65,5 +65,49 @@ export class SheetV2Component implements OnInit {
   }
 
   // endregion lesson00A
+
+  // region lesson02
+
+  currentRow:number= -1
+  currentCol:number= -1
+
+  isCellEdit(i: number, j: number) {
+    return i == this.currentRow && j == this.currentCol
+  }
+
+  selectSingleCell(i: number, j: number) {
+      this.currentRow=i      
+      this.currentCol =j
+  }
+
+  getDropdown(column:any) {
+    
+    return this.lookups [column.lookup];
+  }
+
+  isDropdown(column:any) {
+
+    return false;
+  }
+
+
+  getDisplayValue(column:any, v:any) {
+
+    if (this.isDropdown(column)) {
+
+      let dd = this.getDropdown(column);
+      if (dd) {        
+        return dd[v] || v;
+      }
+    }
+    else {
+      return v
+    }
+  }
+
+  onKeyEvent($event:KeyboardEvent, src = '',type='') {
+
+  }
+  //endregion lesson02
 
 }
