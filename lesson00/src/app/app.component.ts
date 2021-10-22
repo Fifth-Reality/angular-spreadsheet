@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular Demo'
-  version='4'
+  version='5'
   
 }
