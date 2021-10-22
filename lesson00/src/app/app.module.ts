@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SheetV1Component } from './sheet-v1/sheet.component';
 import { SheetV2Component } from './sheet-v2/sheet.component';
+import { SheetV3Component } from './sheet-v3/sheet.component';
 
 
 
@@ -15,7 +16,8 @@ import { SheetV2Component } from './sheet-v2/sheet.component';
   declarations: [
     AppComponent,
     SheetV1Component,
-    SheetV2Component
+    SheetV2Component,
+	SheetV3Component
   ],
   imports: [
     BrowserModule, CommonModule, FormsModule
