@@ -17,6 +17,11 @@ export class SheetV5Component implements OnInit {
   /** ngOnInit() - called before render*/
   ngOnInit(): void {
     // init columns
+   
+    for (let i = 0; i < 10; i++) {
+      this.data = this.data.concat(sampleData)
+    }
+
     this.setupColumns()
 
   }
@@ -124,6 +129,195 @@ export class SheetV5Component implements OnInit {
     }
   }
   // endregion dropdown
+
+
+  //////////////////////////////////////////////
+  ////  Mouse and Selection
+
+  //region mouse selection
+
+
+  selection = {
+    startRow: -1,
+    startCol: -1,
+    endRow: -1,
+    endCol: -1,
+    isSelecting: false,
+    editing: false
+  }
+  /**
+   * onStartSelection 
+   * @param i
+   * @param j
+   */
+  onStartSelection(i:number, j:number) {
+    this.selection.startRow = i;
+    this.selection.startCol = j;
+    this.selection.endRow = i;
+    this.selection.endCol = j;
+    this.selection.isSelecting = true;
+
+  }
+  /**
+   * onEndSelection
+   * @param i
+   * @param j
+   */
+  onEndSelection(i:number, j:number) {
+    if (i > this.selection.startRow) {
+      this.selection.endRow = i
+    }
+    else {
+      this.selection.startRow = i
+    }
+
+    if (j > this.selection.startCol) {
+      this.selection.endCol = j
+    }
+    else {
+      this.selection.startCol = j
+    }
+    // console.log("selection", this.selection)
+
+  }
+  /**
+   * Mouse Event Handler - Down
+   * @param i
+   * @param j
+   */
+  onDataCellMouseDown(i:number, j:number) {
+    this.onStartSelection(i, j)
+  }
+  /**
+   * Mouse Event Handler- Up
+   * @param i
+   * @param j
+   */
+  onDataCellMouseUp(i:number, j:number) {
+    this.onEndSelection(i, j)
+
+  }
+
+  onDataCellMouseMove(i:number, j:number) {
+    const oldRow = this.selection.endRow;
+    const oldCol = this.selection.endCol;
+
+    if (this.selection.isSelecting && (oldRow !== i || oldCol !== j)) {
+      this.onEndSelection(i, j)
+
+      if (oldRow != i && oldRow > 6 && i > oldRow) {
+        //this.win.scrollBy(0, 50)
+      }
+      if (oldRow != i && oldRow > 6 && i < oldRow) {
+        //this.win.scrollBy(0, -50)
+      }
+
+    }
+
+  }
+  /**
+   * isTopSelectedCell for css highlight
+   * @param i
+   * @param j
+   */
+  isTopSelectedCell(i:number, j:number) {
+    return (i === this.selection.startRow)
+  }
+  /**
+   * isBottomSelectedCell for css highlight
+   * @param i
+   * @param j
+   */
+  isBottomSelectedCell(i:number, j:number) {
+    return (i === this.selection.endRow)
+  }
+  /**
+   * isLeftMostSelectedCell for css highlight
+   * @param i
+   * @param j
+   */
+  isLeftMostSelectedCell(i:number, j:number) {
+    return (i === this.selection.startRow)
+  }
+  /**
+   * isRightMostSelectedCell for css highlight
+   * @param i
+   * @param j
+   */
+  isRightMostSelectedCell(i:number, j:number) {
+    return (i === this.selection.endRow)
+  }
+  /**
+   * isSelectedCell is css highlight
+   * @param i
+   * @param j
+   */
+  isSelectedCell(i:number, j:number) {
+    return (i >= this.selection.startRow &&
+      i <= this.selection.endRow &&
+      j >= this.selection.startCol &&
+      j <= this.selection.endCol
+    )
+  }
+
+  /**
+   * isOnlySelectedCell is css highlight anf for cell edit
+   * @param i
+   * @param j
+   */
+  isOnlySelectedCell(i:number, j:number) {
+    return (i === this.selection.startRow &&
+      i === this.selection.endRow &&
+      j === this.selection.startCol &&
+      j === this.selection.endCol
+
+    )
+  }
+  /**
+   * selectOneCell for edit
+   * @param i
+   * @param j
+   */
+  selectOneCell(i:number, j:number) {
+    this.selection.startRow = i
+    this.selection.endRow = i
+    this.selection.startCol = j
+    this.selection.endCol = j
+    this.selection.editing = true;
+
+  }
+
+ // end region mouse selection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
    * onKeyEvent
    * @param $event
@@ -134,5 +328,7 @@ export class SheetV5Component implements OnInit {
 
   }
   //endregion lesson02
+
+
 
 }

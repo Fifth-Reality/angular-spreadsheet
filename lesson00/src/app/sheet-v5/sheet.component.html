@@ -12,7 +12,12 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of displayData(); let i = index">
-        <td *ngFor="let column of displayColumns(); let j=index">
+        <td *ngFor="let column of displayColumns(); let j=index"
+              (mousedown)="onDataCellMouseDown(i,j)"
+              (mouseup)="onDataCellMouseUp(i,j)"
+              (mousemove)="onDataCellMouseMove(i,j)"
+              [ngClass]="{'cell-selected': isSelectedCell(i, j) , 'cell-selected-top':  isTopSelectedCell(i,j) , 'cell-selected-bottom':  isBottomSelectedCell(i,j) }"
+              tabindex="{{i*100+j}}"     >
 
           <div *ngIf="isCellEdit(i,j)">
             <!-- input edit-->
