@@ -12,35 +12,32 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of displayData(); let i = index">
-        <td *ngFor="let column of displayColumns(); let j=index"
-            
-            >
+        <td *ngFor="let column of displayColumns(); let j=index">
 
           <div *ngIf="isCellEdit(i,j)">
             <!-- input edit-->
-            <div *ngIf="!isDropdown(column)">
+            <ng-container *ngIf="!isDropdown(column)">
               <input [(ngModel)]="row[column.name]"
                      name="cell_{{i}}_{{j}}"
                      (keydown)="onKeyEvent($event,'input','keydown')" />
-            </div>
+            </ng-container>
             <!-- input edit-->
             <!-- dropdown edit-->
-            <div *ngIf="isDropdown(column)">
+            <ng-container *ngIf="isDropdown(column)">
               <select [(ngModel)]="row[column.name]" name="select_{{i}}_{{j}}">
-                <option *ngFor="let key of getDropdown(column)" value="{{key}}">
-                  {{key}}
+                <option *ngFor="let kv of getDropdown(column)  | keyvalue" value="{{kv.key}}">
+                  {{kv.value}}
                 </option>
               </select>
-            </div>
+            </ng-container>
             <!-- dropdown edit-->
           </div>
-          <!-- not edit cell-->
+          <!-- read only cell-->
           <div *ngIf="!isCellEdit(i,j)"
-               (click)="currentRow=i; currentCol=j; "
-               >
+               (click)="currentRow=i; currentCol=j; ">
             {{ getDisplayValue (column, row[column.name])}}
           </div>
-          <!-- not edit cell-->
+          <!-- read only  cell-->
 
         </td>
       </tr>
